@@ -1,2 +1,8 @@
 .todo {
 }
+
+.todo--complete {
+  color: grey;
+  font-style: italic;
+  text-decoration: line-through;
+}

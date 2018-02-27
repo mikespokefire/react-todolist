@@ -20,6 +20,11 @@ class App extends Component {
           title: 'World',
           complete: false,
         },
+        {
+          id: 3,
+          title: 'Foo',
+          complete: false,
+        },
       ],
     };
   }
@@ -31,11 +36,26 @@ class App extends Component {
       id: (todos.length + 1),
       title: title,
       complete: false,
-    })
+    });
 
     this.setState({
       todos: todos,
-    })
+    });
+  }
+
+  handleCompleteTodo(id) {
+    let todos = this.state.todos.slice();
+    let todoIndex = todos.findIndex(function(t) {
+      return t.id === id;
+    });
+
+    if (todoIndex >= 0) {
+      todos[todoIndex] = Object.assign({}, todos[todoIndex], { complete: true });
+
+      this.setState({
+        todos: todos,
+      });
+    }
   }
 
   render() {
@@ -48,7 +68,7 @@ class App extends Component {
         <p className="App-intro">
           To get started, edit <code>src/App.js</code> and save to reload.
         </p>
-        <TodoList todos={this.state.todos}/>
+        <TodoList todos={this.state.todos} handleCompleteTodo={(id) => this.handleCompleteTodo(id)}/>
         <AddTodo handleAddTodo={(title) => this.handleAddTodo(title)}/>
       </div>
     );

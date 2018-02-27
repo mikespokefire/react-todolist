@@ -17,6 +17,7 @@ class TodoList extends React.Component {
               id={todo.id}
               title={todo.title}
               complete={todo.complete}
+              handleCompleteTodo={this.props.handleCompleteTodo}
             />
           ))}
         </ul>
@@ -29,6 +30,7 @@ TodoList.propTypes = {
   todos: PropTypes.arrayOf(
     PropTypes.shape(Todo.propTypes)
   ).isRequired,
+  handleCompleteTodo: PropTypes.func.isRequired,
 };
 
 export default TodoList;
