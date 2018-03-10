@@ -50,7 +50,7 @@ class App extends Component {
     });
 
     if (todoIndex >= 0) {
-      todos[todoIndex] = Object.assign({}, todos[todoIndex], { complete: true });
+      todos[todoIndex] = Object.assign({}, todos[todoIndex], { complete: !todos[todoIndex].complete });
 
       this.setState({
         todos: todos,

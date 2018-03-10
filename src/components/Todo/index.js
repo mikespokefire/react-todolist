@@ -15,18 +15,17 @@ class Todo extends React.Component {
       className += ' todo--complete';
     }
 
-    let button = null;
+    let buttonText = this.props.complete ? 'Uncomplete' : 'Complete';
 
-    if (!this.props.complete) {
-      button = <button onClick={(e) => this.handleClick(e)}>
-        Complete
-      </button>
+    if (this.props.complete) {
     }
 
     return (
       <li className={className}>
         {this.props.title}
-        {button}
+        <button onClick={(e) => this.handleClick(e)}>
+          {buttonText}
+        </button>
       </li>
     );
   }
