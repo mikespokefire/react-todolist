@@ -5,24 +5,21 @@ import './index.css';
 
 class Todo extends React.Component {
   handleClick(e) {
-    this.props.handleCompleteTodo(this.props.id);
+    this.props.handleCompleteTodo(this.props.todo.id);
   }
 
   render() {
     let className = 'todo';
 
-    if (this.props.complete) {
+    if (this.props.todo.complete) {
       className += ' todo--complete';
     }
 
-    let buttonText = this.props.complete ? 'Uncomplete' : 'Complete';
-
-    if (this.props.complete) {
-    }
+    let buttonText = this.props.todo.complete ? 'Uncomplete' : 'Complete';
 
     return (
       <li className={className}>
-        {this.props.title}
+        {this.props.todo.title}
         <button onClick={(e) => this.handleClick(e)}>
           {buttonText}
         </button>
@@ -32,9 +29,11 @@ class Todo extends React.Component {
 }
 
 Todo.propTypes = {
-  id: PropTypes.number.isRequired,
-  title: PropTypes.string.isRequired,
-  complete: PropTypes.bool,
+  todo: PropTypes.shape({
+    id: PropTypes.number.isRequired,
+    title: PropTypes.string.isRequired,
+    complete: PropTypes.bool,
+  }),
   handleCompleteTodo: PropTypes.func.isRequired,
 };
 

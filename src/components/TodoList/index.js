@@ -14,9 +14,7 @@ class TodoList extends React.Component {
           {this.props.todos.map(todo => (
             <Todo
               key={todo.id}
-              id={todo.id}
-              title={todo.title}
-              complete={todo.complete}
+              todo={todo}
               handleCompleteTodo={this.props.handleCompleteTodo}
             />
           ))}
@@ -28,7 +26,7 @@ class TodoList extends React.Component {
 
 TodoList.propTypes = {
   todos: PropTypes.arrayOf(
-    PropTypes.shape(Todo.propTypes)
+    Todo.propTypes.todo
   ).isRequired,
   handleCompleteTodo: PropTypes.func.isRequired,
 };
