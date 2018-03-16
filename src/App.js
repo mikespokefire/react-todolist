@@ -1,5 +1,6 @@
 import TodoList from './components/TodoList'
 import AddTodo from './components/AddTodo'
+import Filters from './components/Filters'
 
 import React, { Component } from 'react';
 import logo from './logo.svg';
@@ -9,6 +10,7 @@ class App extends Component {
   constructor(props) {
     super(props);
     this.state = {
+      filter: 'all',
       todos: [
         {
           id: 1,
@@ -58,6 +60,29 @@ class App extends Component {
     }
   }
 
+  handleFilterChange(filter) {
+    this.setState({
+      filter: filter,
+    })
+  }
+
+  filterCompleteStates() {
+    if (this.state.filter === 'all') {
+      return [true, false];
+    } else {
+      return this.state.filter === 'completed' ? [true] : [false];
+    }
+  }
+
+  todos() {
+    let self = this;
+    let filtered_todos = this.state.todos.filter(function(todo) {
+      return self.filterCompleteStates().includes(todo.complete);
+    });
+
+    return filtered_todos;
+  }
+
   render() {
     return (
       <div className="App">
@@ -65,10 +90,8 @@ class App extends Component {
           <img src={logo} className="App-logo" alt="logo" />
           <h1 className="App-title">Welcome to React</h1>
         </header>
-        <p className="App-intro">
-          To get started, edit <code>src/App.js</code> and save to reload.
-        </p>
-        <TodoList todos={this.state.todos} handleCompleteTodo={(id) => this.handleCompleteTodo(id)}/>
+        <Filters filter={this.state.filter} handleFilterChange={(filter) => this.handleFilterChange(filter)}/>
+        <TodoList todos={this.todos()} handleCompleteTodo={(id) => this.handleCompleteTodo(id)}/>
         <AddTodo handleAddTodo={(title) => this.handleAddTodo(title)}/>
       </div>
     );
