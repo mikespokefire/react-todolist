@@ -11,7 +11,7 @@ class Filter extends React.Component {
   render() {
     let className = 'filter';
 
-    if (this.props.value === this.props.filter) {
+    if (this.props.value === this.props.visibilityFilter) {
       className += ' filter--active';
     }
 
@@ -24,7 +24,7 @@ class Filter extends React.Component {
 }
 
 Filter.propTypes = {
-  filter: PropTypes.string.isRequired,
+  visibilityFilter: PropTypes.string.isRequired,
   handleFilterChange: PropTypes.func.isRequired,
   label: PropTypes.string.isRequired,
   value: PropTypes.string.isRequired,
